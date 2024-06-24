@@ -1,0 +1,41 @@
+로컬 개발
+
+서비스
+ 외부에서 접근 가능한 서버
+ 웹서비스(웹서버), 스트리밍 서비스(스트리밍서버), 데이터베이스(데이터베이스서버)
+
+운영체제
+ 리눅스, 윈도우즈
+
+개인pc
+ windows( VSCode, excel, 프로그램 설치)
+
+톰캣(웹서버(nginx) + 자바코드 실행(WAS) + servlet + jsp
+리눅스 + 클라우드 서비스 ==> AWS 서비스 이용
+
+SQL 실행도구
+RDBMS ( Relational DBMS : 관계형 데이터베이스 )
+ Oracle - sqlplus(오라클 전용)
+ DBeaver(모든 종류의 DB 서버와 연동가능)
+
+Document 기반
+ 몽고디비
+
+장고(Django)
+파이썬 언어를 사용하는 스프링부트와 비슷한 기능
+cmd 로 장고 설치 - 파이썬소스 파일에 장고 폴더/myapp1 폴더 생성 - myapp1 폴더에서 django-admin startproject config . 명령문 실행 - VS code에 Django 익스텐션 설치 - 설정 > Extensions > Emmet > Include Languages 에 "django-html": "html" 추가
+myapp1 폴더에서 python manage.py runserver 명령문 실행(서버 실행 - 프로젝트 안에 DB 자동생성되서 내장DB와 연동됨)
+myapp1 폴더에서 python manage.py startapp todo 명령문 실행(todo 프로젝트 작성) ==> 기능별로 app 제작 가능
+manage.py migrate (데이터베이스 변경사항 적용)
+python manage.py createsuperuser(어드민 계정 활성화)
+python manage.py makemigrations(데이터베이스 변경, makemigrations 실행 후에 migrate 실행) - todo 폴더의 models.py 에 작성한 모델대로(+PK ID) 새 테이블 todo>migrations 폴더의 0001_initial.py로 생성
+
+스프링 - MVC 패턴 : Model(Database), View(화면단-jsp, 템플릿 html), Controller(+Service)
+ 스프링 url : controller 위에 작성해서 경로 지정
+
+장고 - MTV 패턴 : Model(Database), Templates(html), View(*)
+ 장고 url : urls.py 에 사용하는 url 정의해둠
+ 1) config / urls.py 
+ 2) 각 앱 / urls.py
+
+db : ORM 
