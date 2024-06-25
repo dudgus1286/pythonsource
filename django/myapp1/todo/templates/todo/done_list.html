@@ -9,12 +9,12 @@
     </a>
   </div>
   <div class="col text-end">
-    <a href="{% url "done_list" %}" class="btn btn-primary">완료된 Todo 목록</a>
+    <a href="{% url "list" %}" class="btn btn-primary">Todo 목록</a>
   </div>
 </div>
 {% comment %} QuerySet 으로 출력 {{todos}} {% endcomment %}
 <table class="table mt-5">
-  {% for todo in todos %}
+  {% for todo in dones %}
   <tr>
     <th>
       <a href="{% url "read" id=todo.id %}" class="text-reset text-decoration-none">{{todo.title}}</a>
@@ -24,7 +24,7 @@
     </th>
     <td class="text-end">
       <a href="{% url "done" id=todo.id %}" class="btn btn-danger btn-sm">완료</a>
-      <a href="{% url "edit" id=todo.id %}" class="btn btn-outline-primary btn-sm">수정</a>
+      <a href="" class="btn btn-outline-primary btn-sm">수정</a>
     </td>
   </tr>
   {% endfor %}

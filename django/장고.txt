@@ -23,12 +23,6 @@ Document 기반
 
 장고(Django)
 파이썬 언어를 사용하는 스프링부트와 비슷한 기능
-cmd 로 장고 설치 - 파이썬소스 파일에 장고 폴더/myapp1 폴더 생성 - myapp1 폴더에서 django-admin startproject config . 명령문 실행 - VS code에 Django 익스텐션 설치 - 설정 > Extensions > Emmet > Include Languages 에 "django-html": "html" 추가
-myapp1 폴더에서 python manage.py runserver 명령문 실행(서버 실행 - 프로젝트 안에 DB 자동생성되서 내장DB와 연동됨)
-myapp1 폴더에서 python manage.py startapp todo 명령문 실행(todo 프로젝트 작성) ==> 기능별로 app 제작 가능
-manage.py migrate (데이터베이스 변경사항 적용)
-python manage.py createsuperuser(어드민 계정 활성화)
-python manage.py makemigrations(데이터베이스 변경, makemigrations 실행 후에 migrate 실행) - todo 폴더의 models.py 에 작성한 모델대로(+PK ID) 새 테이블 todo>migrations 폴더의 0001_initial.py로 생성
 
 스프링 - MVC 패턴 : Model(Database), View(화면단-jsp, 템플릿 html), Controller(+Service)
  스프링 url : controller 위에 작성해서 경로 지정
@@ -38,4 +32,30 @@ python manage.py makemigrations(데이터베이스 변경, makemigrations 실행
  1) config / urls.py 
  2) 각 앱 / urls.py
 
-db : ORM 
+cmd 로 장고 설치 - 파이썬소스 파일에 장고 폴더/myapp1 폴더 생성 - VS code에 Django 익스텐션 설치 - 설정 > Extensions > Emmet > Include Languages 에 "django-html": "html" 추가
+
+myapp1 폴더에서 django-admin startproject config . 명령문 실행(config 말고도 다른 폴더명 사용 가능)
+python manage.py startapp todo (todo 프로젝트 작성) ==> 기능별로 app 제작 가능
+manage.py migrate (데이터베이스 변경사항 적용-시작 시 기본DB 반영할 때 사용)
+python manage.py runserver (서버 실행 - 프로젝트 안에 DB 자동생성되서 내장DB와 연동됨)
+python manage.py createsuperuser(어드민 계정 활성화)
+
+> Model 정의 시
+python manage.py makemigrations (데이터베이스 변경, makemigrations 실행 후에 migrate 실행)
+- todo 폴더의 models.py 에 작성한 모델대로(+PK ID) 새 테이블 todo>migrations 폴더의 0001_initial.py로 생성 후에 migrate 실행
+
+python manage.py sqlmigrate 앱이름 번호 - 해당 앱의 번호에 해당하는 모델(테이블) SQL 생성 구문 조회
+(이미 생성한 모델 수정하면 alter 구문 보내짐)
+
+python manage.py shell 터미널에서 shell로 DB조회
+exit() shell 에서 나가기
+
+select * from person; == Person.objects.all
+insert into values(); == [ person = Person(...) 후 person.save( ) ] 또는
+		[ Person.objects.create(...) ]
+select * from person where first_name='park'; == Person.objects.get(first_name='park') 또는
+				Person.objects.filter(first_name='park') - QuerySet 에 담겨서 반환
+			Person.objects.get(id=5) <= 없는 번호라서 DoesNotExist 오류 뜸(get - try catch에 담음)
+			Person.objects.filter(id=5) <= 오류 안남
+			Person.objects.filter(first_name__contains='pa') - sql like 와 같음(DB에 따라 대소문자 구별할 수도 있음)
+			Person.objects.filter(first_name__icontains='PA') - 대소문자 구별안함
