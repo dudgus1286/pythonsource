@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# django 폴더 바로 밑 boarder 프로젝트 폴더
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-71_lku+fnj2*8w@buz$jy26!v#k-^h$=#6)b6&7-z+w$w+u42a"
+SECRET_KEY = "django-insecure-!hpt2g&n!xv!j!b=-(97s9ozeds$v*0er7ppo*tl-ffgjld&)1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "app1",
-    "users",
+    "board",
 ]
 
 MIDDLEWARE = [
@@ -53,10 +53,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 
+# templates 폴더경로 기본설정
+# 기본설정 - 프로젝트폴더 / 앱폴더 / templates
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "templates"
+        ],  # 프로젝트 폴더 바로 밑 templates 폴더를 템플릿 폴더로 지정함
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -118,6 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+# static 폴더 경로 지정
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

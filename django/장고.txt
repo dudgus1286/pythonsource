@@ -47,7 +47,7 @@ python manage.py makemigrations (데이터베이스 변경, makemigrations 실�
 python manage.py sqlmigrate 앱이름 번호 - 해당 앱의 번호에 해당하는 모델(테이블) SQL 생성 구문 조회
 (이미 생성한 모델 수정하면 alter 구문 보내짐)
 
-python manage.py shell 터미널에서 shell로 DB조회
+python manage.py shell 터미널에서 shell로 DB조회(shell 직접 명령을 내릴 수 있는 기능)
 exit() shell 에서 나가기
 
 select * from person; == Person.objects.all
@@ -59,3 +59,5 @@ select * from person where first_name='park'; == Person.objects.get(first_name='
 			Person.objects.filter(id=5) <= 오류 안남
 			Person.objects.filter(first_name__contains='pa') - sql like 와 같음(DB에 따라 대소문자 구별할 수도 있음)
 			Person.objects.filter(first_name__icontains='PA') - 대소문자 구별안함
+정렬 모델명.objects.order_by('기준이 되는 컬럼명') - 컬럼명 앞에 빼기 기호'-' 추가하면 역순
+특정 요소 제외하고 조회 모델명.objects.exclude(기준이 되는 컬럼명 = '조건')
