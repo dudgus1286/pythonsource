@@ -1,0 +1,22 @@
+django user
+프로젝트 시작부터 자동으로 User 모델 생성해줌 <- 활성화해서 사용 가능
+User 모델 작성 없이도 forms.py 에 UserForm 생성가능
+
+회원가입
+로그인
+로그아웃
+비밀번호 변경
+비밀번호 초기화 ( + 이메일 인증 기능 ) 기본적으로 구현되었음
+
+urlpatterns = [path("account/", include("django.contrib.auth.urls")),]
+=>
+account/ login/ [name='login'] => 템플릿 html 필요(config - settings.py 에 BASE_DIR 로 템플릿 폴더 경로 설정, 프로젝트 폴더 바로 밑에 templates 폴더 생성),
+ 로그인 성공 시 account/profile 로 이동이 기본값,
+ config - settings.py 에서 설정 가능 : LOGIN_REDIRECT_URL = '/' , LOGOUT_REDIRECT_URL = '/'
+account/ logout/ [name='logout']
+account/ password_change/ [name='password_change'] => 변경 성공 시 account/ password_change/done/ 로 이동
+account/ password_change/done/ [name='password_change_done']
+account/ password_reset/ [name='password_reset']
+account/ password_reset/done/ [name='password_reset_done']
+account/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+account/ reset/done/ [name='password_reset_complete']
