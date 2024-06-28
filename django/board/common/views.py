@@ -8,7 +8,7 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("index")
+            return redirect("common:login")
 
     else:
         form = UserForm()

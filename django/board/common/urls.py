@@ -23,7 +23,7 @@ urlpatterns = [
         auth_views.PasswordChangeView.as_view(
             template_name="common/password_change.html",
             # 비밀번호 성공 시 이동 경로(기본값-password_chane_done)
-            success_url=reverse_lazy("index"),
+            success_url=reverse_lazy("common:login"),
         ),
         name="password_change",
     ),

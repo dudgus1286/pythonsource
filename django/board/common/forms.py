@@ -13,3 +13,4 @@ class UserForm(UserCreationForm):
         model = User
         # password 자동으로 포함됨
         fields = ["username", "email"]
+        labels = {"username": "아이디"}

@@ -44,13 +44,14 @@
                 <td>
                   <span class="badge text-bg-warning px-2 py-1">
                     <!--질문 추천 수 보여주기-->
+                    {{question.voter.count}}
                   </span>
                 </td>
                 <td>
                   <a href="{% url "board:question_detail" qid=question.id %}" class="text-decoration-none text-dark">
                     {{question.subject}}
 
-                    {% if questions.answer_set.count > 0 %}
+                    {% if question.answer_set.all.count > 0 %}
                       <span class="text-danger small mx-2">
                         <!-- 질문에 달린 답변의 개수 표시 -->
                         {{question.answer_set.count}}
@@ -61,6 +62,7 @@
                 </td>
                 <td>
                   <!-- 질문 작성자 -->
+                  {{question.author}}
                 </td>
                 <td>
                   {{question.created_at}}
@@ -107,8 +109,12 @@
     <!--페이지 번호 클릭 시 이동할 폼-->
     <form action="" method="get" id="actionForm">
       <input type="hidden" name="keyword" value="" id="keyword"/>
-      <input type="hidden" name="page" value="" id="page"/>
+      <input type="hidden" name="page" value="{{page}}" id="page"/>
     </form>
   </div>
 
 {% endblock content %}
+{% load static %}
+{% block script %}
+  <script src="{% static "js/list.js" %}"></script>
+{% endblock script %}
