@@ -20,8 +20,19 @@ class Question(models.Model):
     # , related_name='voter_question' 지정 필요
     voter = models.ManyToManyField(User, related_name="voter_question")
 
+    # 조회수
+    view_cnt = models.BigIntegerField(default=0)
+
     def __str__(self):
         return self.subject
+
+
+class QuestionCount(models.Model):
+    ip = models.CharField(max_length=30)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    def __unique__(self):
+        return self.ip
 
 
 class Answer(models.Model):

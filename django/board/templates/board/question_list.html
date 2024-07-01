@@ -7,15 +7,15 @@
     <div class="row mt-3 justify-content-between">
       <div class="col-md-3">
         <select class="form-select so">
-          <option value="recent">최신순</option>
-          <option value="recommend">추천순</option>
-          <option value="popular">인기순</option>
+          <option value="recent" {% if so == 'recent' %} selected='selected' {% endif %}>최신순</option>
+          <option value="recommend" {% if so == 'recommend' %} selected='selected' {% endif %}>추천순</option>
+          <option value="popular" {% if so == 'popular' %} selected='selected' {% endif %}>인기순</option>
         </select>
       </div>
       <div class="col-md-8">
         <div class="input-group mb-3">
-          <input type="text" name="" id="top_keyword" class="form-control" value=""/>
-          <button class="btn btn-outline-secondary" type="submit" id="btn_search">찾기</button>
+          <input type="text" name="" id="top_keyword" class="form-control" value="{{keyword|default_if_none:" "}}"/>
+          <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
         </div>
       </div>
     </div>
@@ -29,6 +29,7 @@
             <th scope="col">제목</th>
             <th scope="col">작성자</th>
             <th scope="col">작성일시</th>
+            <th scope="col">조회수</th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +49,7 @@
                   </span>
                 </td>
                 <td>
-                  <a href="{% url "board:question_detail" qid=question.id %}" class="text-decoration-none text-dark">
+                  <a href="{{question.id}}" class="text-decoration-none text-dark">
                     {{question.subject}}
 
                     {% if question.answer_set.all.count > 0 %}
@@ -67,6 +68,9 @@
                 <td>
                   {{question.created_at}}
                 </td>
+                <td>
+                  {{question.view_cnt}}
+                </td>
               </tr>
             {% endfor %}
           {% else %}
@@ -81,22 +85,22 @@
         <ul class="pagination justify-content-center">
           {% if questions.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="?page={{questions.previous_page_number}}">Previous</a>
+              <a class="page-link" href="{{questions.previous_page_number}}">Previous</a>
             </li>
           {% endif %}
 
+          <!-- 현재 페이지를 기준으로 앞뒤로 5페이지씩 페이지목록에 출력해줌 -->
           {% for page in questions.paginator.page_range %}
-            <!-- 현재 페이지를 기준으로 앞뒤로 5페이지씩 페이지목록에 출력해줌 -->
             {% if page >= questions.number|add:-5 and page <= questions.number|add:5%}
               <li class="page-item {% if page == questions.number %}active{% endif %}">
-                <a class="page-link" href="?page={{page}}">{{page}}</a>
+                <a class="page-link" href="{{page}}">{{page}}</a>
               </li>
             {% endif %}
           {% endfor %}
 
           {% if questions.has_next %}
             <li class="page-item">
-              <a class="page-link" href="?page={{questions.next_page_number}}">Next</a>
+              <a class="page-link" href="{{questions.next_page_number}}">Next</a>
             </li>
           {% endif %}
         </ul>
@@ -108,8 +112,9 @@
 
     <!--페이지 번호 클릭 시 이동할 폼-->
     <form action="" method="get" id="actionForm">
-      <input type="hidden" name="keyword" value="" id="keyword"/>
+      <input type="hidden" name="keyword" value="{{keyword|default_if_none:''}}" id="keyword"/>
       <input type="hidden" name="page" value="{{page}}" id="page"/>
+      <input type="hidden" name="so" value="{{so}}" id="so"/>
     </form>
   </div>
 
