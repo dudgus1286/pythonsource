@@ -1,0 +1,5 @@
+pip install django-taggit - 쟝고에 태그 기능 추가
+taggit-tag 테이블 : 태그 정보
+taggit_taggeditem : 태깅한 데이터 기록
+
+pip install django-social-share - 쟝고 페이지 소셜 공유 기능 추가
